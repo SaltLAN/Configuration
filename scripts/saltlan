@@ -1,0 +1,99 @@
+#!/bin/bash
+
+# SaltLAN toolset
+# Written by @Pips801
+# 
+# Usage:
+# #~: ./saltlan
+#         cache
+#           size <target>
+#           list
+#           delete <appid>
+#           lookup <appid>
+#         logs <cache>
+#         dhcp
+#           count
+#           list
+#           search
+#             <ip>
+#             <hostname>
+#             <MAC addr>
+#
+
+if [[ $1 == "cache" ]]
+then
+
+  if [[ $2 == "size" ]] # saltlan cache size
+    then
+     
+     if [[ -n "$3" ]] #saltlan cache size <target> (if isset <target>)
+     then
+       docker exec $3.cache.saltlan.org du -sh /data/cache | sed "s/\/data\/cache//"
+     else #no target
+       echo "[Error] No cache selected."
+       echo "Cache options: steam, blizzard, origin, uplay"
+       exit 1
+     fi
+  elif [[ $2 == "list" ]] # saltlan cache list
+    then
+      docker exec steam.cache.saltlan.org ls -1 /data/cache/depot/
+      
+  elif [[ $2 == "delete" ]] # saltlan cache delete 
+    then
+      if [[ -n "$3" ]] # saltlan cache <appid> 
+        then
+          docker exec steam.cache.saltlan.org rm -r /data/cache/depot/$3/
+          echo "Deleted $3"
+      else # no target
+        echo "[Error] appid not set."
+        exit 1
+      fi
+    elif [[ $2 == "lookup" ]]
+      then
+
+        if [[ -n "$3" ]]
+          then
+          curl -Ls https://steamdb.info/depot/$3 | grep "\<h1" | sed 's/.*header-title\">//;s/<\/h1.*//' | sed 's/<[^>]*>//g' | sed 's/Depot » //g'
+        else
+          echo "[Error] appid not set."
+          exit 1
+      fi
+    fi
+elif [[ $1 = "logs" ]]
+  then
+
+  if [[ -n "$2" ]]
+    then
+    echo "[Info] Press Ctrl-c to exit."
+    docker exec $2.cache.saltlan.org tail -F /data/logs/access.log
+  else
+    echo "[Error] No cache selected."
+    echo "Cache options: steam, blizzard, origin, uplay"
+  fi
+
+elif [[ $1 = "dhcp" ]]
+  then
+
+    if [[ $2 == "count" ]]
+      then
+      sed -n '$=' /var/lib/misc/dnsmasq.leases
+
+    elif [[ $2 == "list" ]]
+      then
+      cat '/var/lib/misc/dnsmasq.leases'
+
+    elif [[ $2 == "search" ]]
+      then
+
+      if [[ -n "$3" ]]
+        then
+        cat "/var/lib/misc/dnsmasq.leases" | grep $3
+      else
+        echo "[Error] no search param."
+      fi
+    fi
+
+else
+
+echo "[Error] No option selected."
+fi
