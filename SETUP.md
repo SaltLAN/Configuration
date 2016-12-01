@@ -65,7 +65,7 @@ auto eth1
 iface eth1 inet static
  address 10.0.0.1 # router address
  netmask 255.255.255.0 # the netmask of the network
- network 10.0.0.0 # vase address for the network
+ network 10.0.0.0 # base address for the network
  broadcast 10.0.0.255 # broadcast address
 ```
 
