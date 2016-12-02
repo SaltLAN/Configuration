@@ -21,7 +21,7 @@ The goals of this project were more than one, and can be broken down into a few 
 
   * This means caching Steam, Origin, Uplay, Blizzard, Windows updates, Hirez, RSI, Frontier, Twitch, and Youtube.
 
-3.  Be a (single) server
+3.  Be a server
 
   *  We will be serving like it's hot; Game servers, file servers, internal websites, control panels, etc.
 
@@ -134,3 +134,57 @@ and save it. Then, restart dnsmasq
 Now, dnsmasq should be serving IP addresses and your server should be able to route them. Plug a computer into your LAN port on your server and see if you get an IP address and can get online.
 
 # 2. Caching
+
+We will be using custom Docker images running nginx caching proxies to handle all game caching. This makes it easier to turn on and off certan caches, as well as the ability to track the usage, backup, restore, and monitor each individual cache.
+
+Before we setup docker or any caches, we need to give each cache a dedicated IP address. Plan out your address scheme. For DHCP, we start the address assignment at `10.0.0.10`, which provides us with 9 dedicated internal IP addresses for whatever we need.
+
+To give each cache a dedicated IP address, we will first need to make virtual interfaces in `/etc/network/interfaces`. 
+
+`sudo nano /etc/network/interfaces`
+
+and add this below your current configuration. Please make sure to change `eth0/eth1` and each `10.0.0.x` IP address with whatever you've decided.
+
+```
+...
+
+# Steam
+auto eth1:2
+iface eth1:2 inet static
+ address 10.0.0.2
+
+# Battle.net
+auto eth1:3
+iface eth1:3 inet static
+ address 10.0.0.3
+
+# Origin
+auto eth1:4
+iface eth1:4 inet static
+ address 10.0.0.4
+
+# Uplay
+auto eth1:5
+iface eth1:5 inet static
+ address 10.0.0.5
+
+# Riot
+auto eth1:6
+iface eth1:6 inet static
+ address 10.0.0.6
+
+# Frontier
+auto eth1:7
+iface eth1:7 inet static
+ address 10.0.0.7
+
+# Windows
+auto eth1:8
+iface eth1:8 inet static
+ address 10.0.0.8
+
+# Twitch
+auto eth1:9
+iface eth1:9 inet static
+ address 10.0.0.9
+ ```
