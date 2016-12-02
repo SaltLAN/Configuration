@@ -112,7 +112,7 @@ Now that it is routing, it needs to be able to assign IP addresses. We use `dnsm
 
 Now we need to configure dnsmasq to act like a DHCP server. First, lets backup it's default configration file.
 
-`sudo cp /etc/dndmasq.conf /etc/dnsmasq.conf.backup`
+`sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.backup`
 
 Next, we'll make a config file for it.
 
