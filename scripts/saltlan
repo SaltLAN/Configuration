@@ -6,6 +6,7 @@
 # Usage:
 # #~: ./saltlan
 #         cache
+#           restart
 #           size <target>
 #           list
 #           delete <appid>
@@ -19,6 +20,28 @@
 #             <hostname>
 #             <MAC addr>
 #
+
+#container names
+STEAMCACHE="steam.cache.saltlan.org"
+ORIGINCACHE="origin.cache.saltlan.org"
+BLIZZARDCACHE="blizzard.cache.saltlan.org"
+UPLAYCACHE="uplay.cache.saltlan.org"
+
+
+#interfaces
+WAN_INTERFACE="eno1"
+LAN_INTERFACE="eno2"
+STEAMCACHE_INTERFACE="eno2:2"
+BLIZZARDCACHE_INTERFACE="eno2:3"
+ORIGINCACHE_INTERFACE="eno2:4"
+UPLAYCACHE_INTERFACE="eno2:5"
+
+#IP
+STEAMCACHE_IP="10.0.0.2"
+BLIZZARDCACHE_IP="10.0.0.3"
+ORIGINCACHE_IP="10.0.0.4"
+UPLAYCACHE_IP="10.0.0.5"
+
 
 if [[ $1 == "cache" ]]
 then
@@ -58,14 +81,38 @@ then
           echo "[Error] appid not set."
           exit 1
       fi
+    elif [[ $2 == "restart" ]]
+      then
+
+      if [[ -n "$3" ]]
+        then
+        docker restart $3.cache.saltlan.org > /dev/null
+        echo "Restarted."
+      else
+        echo "[Error] No cache selected."
+      fi
+
     fi
+
+
 elif [[ $1 = "logs" ]]
   then
 
   if [[ -n "$2" ]]
-    then
+    then 
+      if [[ $2 == "dns" ]]
+        then
+        echo "[Info] Press Ctrl-c to exit."
+        tail -F /etc/dnsmasq.log | grep "\[A"
+
+      elif [[ $2 == "dhcp" ]]
+       then
+        echo "[Info] Press Ctrl-c to exit."
+        tail -F /etc/dnsmasq.log | grep "dnsmasq-dhcp"
+      else
     echo "[Info] Press Ctrl-c to exit."
     docker exec $2.cache.saltlan.org tail -F /data/logs/access.log
+      fi
   else
     echo "[Error] No cache selected."
     echo "Cache options: steam, blizzard, origin, uplay"
@@ -93,7 +140,94 @@ elif [[ $1 = "dhcp" ]]
       fi
     fi
 
-else
+elif [[ $1 == "start" ]] 
+	then
+	
+	clear
 
+	figlet SaltLAN | lolcat -a -d 7
+
+	echo "Starting $STEAMCACHE..."
+	docker start $STEAMCACHE > /dev/null
+
+	echo "Starting $BLIZZARDCACHE..."
+	docker start $BLIZZARDCACHE > /dev/null
+
+	echo "Starting $ORIGINCACHE..."
+	docker start $ORIGINCACHE > /dev/null
+
+	echo "$starting $UPLAYCACHE..."
+	docker start $UPLAYCACHE > /dev/null
+
+	echo "Starting Grafana..."
+	service grafana-server restart
+	tmux new -d -s grafana "grafana-server | lolcat -p 100 -F 0.005"
+
+	echo "Starting InfluxDB..."
+	service influxd stop
+	tmux new -d -s influx "influxd | lolcat -p 100 -F 0.005"
+
+	echo "Starting Telegraf..."
+	service telegraf stop
+	tmux new -d -s telegraf "telegraf | lolcat -p 100 -F 0.005"
+
+	echo "Reloading dnsmasq..."
+	service dnsmasq restart
+
+	echo "Done."
+
+elif [[ $1 == "stop" ]]
+	then
+
+	clear
+
+	figlet SaltLAN | lolcat -a -d 7
+
+	echo "Stopping $STEAMCACHE..."
+	docker stop $STEAMCACHE
+
+	echo "Stopping $ORIGINCACHE..."
+	docker stop $ORIGINCACHE
+
+	echo "Stopping $BLIZZARDCACHE..."
+	docker stop $BLIZZARDCACHE
+
+	echo "Stopping $UPLAYCACHE..."
+	docker stop $UPLAYCACHE
+
+	tmux kill-session -t telegraf
+	tmux kill-session -t influx
+	tmux kill-session -t grafana
+
+
+elif [[ $1 == "help" ]]
+  then
+    figlet "SaltLAN"
+    echo "
+SaltLAN toolset
+Written by @Pips801
+
+Usage:
+#~: ./saltlan
+		start
+		stop
+        cache
+          restart <cache>
+          size <cache>
+          list
+          delete <appid>
+          lookup <appid>
+        logs
+          dns
+          dhcp
+          <cache>
+        dhcp
+          count
+          list
+          search
+            <ip>
+            <hostname>
+            <MAC addr>"
+else
 echo "[Error] No option selected."
 fi
