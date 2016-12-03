@@ -1,0 +1,95 @@
+# SaltLAN network configuration
+
+source /etc/network/interfaces.d/*
+
+auto lo
+iface lo inet loopback
+
+allow-hotplug enp2s0
+iface enp2s0 inet dhcp
+
+
+# WAN - to wall
+allow-hotplug eno1
+#auto eno1
+iface eno1 inet dhcp
+#	netmask 255.255.255.0
+
+
+
+# LAN - to switch
+#allow-hotplug eno2
+auto eno2
+iface eno2 inet static
+	address 10.0.0.1
+	netmask 255.255.255.0
+	network 10.0.0.0
+	broadcast 10.0.0.255
+	dns-nameservers 10.0.0.1
+
+# Caches
+
+
+# steam
+auto eno2:2
+iface eno2:2 inet static
+	address 10.0.0.2
+
+# Batle.net
+auto eno2:3
+iface eno2:3 inet static
+	address 10.0.0.3
+
+# Origin
+auto eno2:4
+iface eno2:4 inet static
+	address 10.0.0.4
+
+#uplay
+auto eno2:5
+iface eno2:5 inet static
+	address 10.0.0.5
+
+
+
+# Game servers
+
+# csgo
+auto eno2:10
+iface eno2:10 inet static
+        address 10.0.0.10
+
+# tf2
+auto eno2:11
+iface eno2:11 inet static
+        address 10.0.0.11
+        
+# ut3
+auto eno2:12
+iface eno2:12 inet static
+        address 10.0.0.12
+        
+# insurgency
+auto eno2:13
+iface eno2:13 inet static
+        address 10.0.0.13
+        
+# ss3
+auto eno2:14
+iface eno2:14 inet static
+        address 10.0.0.14
+        
+# chiv
+auto eno2:15
+iface eno2:15 inet static
+        address 10.0.0.15
+        
+# starbound
+auto eno2:16
+iface eno2:16 inet static
+        address 10.0.0.16
+        
+# factorio
+auto eno2:17
+iface eno2:17 inet static
+        address 10.0.0.17
