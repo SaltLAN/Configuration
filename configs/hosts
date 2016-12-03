@@ -1,0 +1,24 @@
+
+127.0.0.1	localhost
+127.0.1.1	SaltLAN
+#10.0.0.1	server.saltlan.org
+10.0.0.2	steam.cache.saltlan.org
+10.0.0.3	blizzard.cache.saltlan.org
+10.0.0.4	origin.cache.saltlan.org
+10.0.0.5	uplay.cache.saltlan.org
+
+10.0.0.10	csgo.server.saltlan.org
+10.0.0.11	tf2.server.saltlan.org
+10.0.0.12	ut2.server.saltlan.org
+10.0.0.13	insurgency.server.saltlan.org
+10.0.0.14	ss3.server.saltlan.org
+10.0.0.15	chiv.server.saltlan.org
+10.0.0.16	starbound.server.saltlan.org
+10.0.0.17	factorio.server.saltlan.org
+10.0.0.18	ts.server.saltlan.org
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
