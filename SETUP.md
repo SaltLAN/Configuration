@@ -188,3 +188,19 @@ auto eth1:9
 iface eth1:9 inet static
  address 10.0.0.9
  ```
+
+ Then save that file. To see if the Virtual Interfaces are appearing to the system, you can run `ifconfig | grep eth1:` to see.
+
+Now that we have dedicated internal IPs for each cache, we now need to setup the cache. To do this, we will be using Docker containers written by the [steamcache.net](https://steamcache.github.io/) team. You need docker though.
+
+`sudo apt-get install docker docker.io docker-engine`
+
+Once that is installed, we will provision the containers. SteamCache team has made two types of cache. The first type is specific to Steam and is optimized for Steam downloads. The second is a generic cache, which will work with any download, Origin, Uplay, Battle.net, etc. This generic cache will also work with steam, however it is not as efficient as the Steam-specific container. Meaning; We'll be running the Steam cache for Steam downloads, and the generic cache for all else.
+
+The `docker run` command will need three arguments from us.
+
+`sudo docker run --name steam-cache -p 10.0.0.2:80:80 steamcache/steamcache`
+
+1. The first argument, `--name`, specifies the Docker container name. We will use this name to start, stop, and generally reference this container.
+2. Second, `-p 10.0.0.2:80:80` This specifies the IP address to bind the container to, as well as the port. Make sure to double check your `/etc/network/interfaces` for the IP address for each container. The `:80:80` section tells Docker what port to forward inside the docker container.
+3. Third, `steamcache/steamcache` refers to the hub.docker.io user (steamcache) and the container (also named steamcache), much the same that `SaltLAN/Configuration` is the user and repository on Github.
