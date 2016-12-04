@@ -137,6 +137,8 @@ Now, dnsmasq should be serving IP addresses and your server should be able to ro
 
 We will be using custom Docker images running nginx caching proxies to handle all game caching. This makes it easier to turn on and off certan caches, as well as the ability to track the usage, backup, restore, and monitor each individual cache.
 
+## Virtual Interfaces
+
 Before we setup docker or any caches, we need to give each cache a dedicated IP address. Plan out your address scheme. For DHCP, we start the address assignment at `10.0.0.10`, which provides us with 9 dedicated internal IP addresses for whatever we need.
 
 To give each cache a dedicated IP address, we will first need to make virtual interfaces in `/etc/network/interfaces`. 
@@ -190,6 +192,8 @@ iface eth1:9 inet static
  ```
 
  Then save that file. To see if the Virtual Interfaces are appearing to the system, you can run `ifconfig | grep eth1:` to see.
+
+## Docker
 
 Now that we have dedicated internal IPs for each cache, we now need to setup the cache. To do this, we will be using Docker containers written by the [steamcache.net](https://steamcache.github.io/) team. You need docker though.
 
