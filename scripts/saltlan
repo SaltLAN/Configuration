@@ -5,6 +5,8 @@
 # 
 # Usage:
 # #~: ./saltlan
+# 	  start
+#         stop
 #         cache
 #           restart
 #           size <target>
@@ -42,6 +44,8 @@ BLIZZARDCACHE_IP="10.0.0.3"
 ORIGINCACHE_IP="10.0.0.4"
 UPLAYCACHE_IP="10.0.0.5"
 
+#Namespace
+HOSTNAME_SPACE="saltlan.org"
 
 if [[ $1 == "cache" ]]
 then
@@ -209,8 +213,8 @@ Written by @Pips801
 
 Usage:
 #~: ./saltlan
-		start
-		stop
+	start
+	stop
         cache
           restart <cache>
           size <cache>
