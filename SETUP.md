@@ -215,19 +215,13 @@ The `docker run` command will need three arguments from us.
 
 To provision containers for the cache, we just need to run the same command and change the arguments for each container.
 
-Steam
-`sudo docker run --name steam-cache -p 10.0.0.2:80:80 -d steamcache/steamcache`
-Battle.net
-`sudo docker run --name blizzard-cache -p 10.0.0.3:80:80 -d steamcache/generic`
-Origin
-`sudo docker run --name origin-cache -p 10.0.0.4:80:80 -d steamcache/generic`
-Uplay
-`sudo docker run --name uplay-cache -p 10.0.0.5:80:80 -d steamcache/generic`
-Riot
-`sudo docker run --name riot-cache -p 10.0.0.6:80:80 -d steamcache/generic`
-Frontier
-`sudo docker run --name frontier-cache -p 10.0.0.7:80:80 -d steamcache/generic`
-Windows updates
-`sudo docker run --name windows-cache -p 10.0.0.8:80:80 -d steamcache/generic`
-Twitch
-`sudo docker run --name twitch-cache -p 10.0.0.4:80:80 -d steamcache/twitch`
+Service | Command 
+ --- | --- 
+Steam | `sudo docker run --name steam-cache -p 10.0.0.2:80:80 -d steamcache/steamcache`
+Battle.net | `sudo docker run --name blizzard-cache -p 10.0.0.3:80:80 -d steamcache/generic`
+Origin | `sudo docker run --name origin-cache -p 10.0.0.4:80:80 -d steamcache/generic`
+Uplay | `sudo docker run --name uplay-cache -p 10.0.0.5:80:80 -d steamcache/generic`
+Riot | `sudo docker run --name riot-cache -p 10.0.0.6:80:80 -d steamcache/generic`
+Frontier | `sudo docker run --name frontier-cache -p 10.0.0.7:80:80 -d steamcache/generic`
+Windows | `sudo docker run --name windows-cache -p 10.0.0.8:80:80 -d steamcache/generic`
+Twitch | `sudo docker run --name twitch-cache -p 10.0.0.4:80:80 -d steamcache/twitch`
