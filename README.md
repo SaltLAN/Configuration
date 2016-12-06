@@ -67,7 +67,7 @@ IP Address | Hostname | Port | Interface | Service | Comments
 `10.0.0.6 - 9` | Reserved | N/A | N/A | N/A
 `10.0.0.10` | `csgo.server.saltlan.org` | `27015` | `eno2:10` |  LGSM | CS:GO server
 `10.0.0.11` | `tf2.server.saltlan.org` | `27015` | `eno2:11` |  LGSM | TF2 server
-`10.0.0.12` | `ut3.server.saltlan.org` | `27015` | `eno2:12` |  LGSM | Unreal Tournament 2 server
+`10.0.0.12` | `q3.server.saltlan.org` | `27015` | `eno2:12` |  LGSM | Quake 3 server
 `10.0.0.13` | `insurgency.server.saltlan.org` | `27015` | `eno2:13` |  LGSM | Insurgency server
 `10.0.0.14` | `ss3.server.saltlan.org` | `27015` | `eno2:14` |  LGSM | Serious Sam 3 server
 `10.0.0.15` | `chiv.server.saltlan.org` | `27015` | `eno2:15` |  LGSM | Chivalry server
