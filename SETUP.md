@@ -224,4 +224,4 @@ Uplay | `sudo docker run --name uplay-cache -p 10.0.0.5:80:80 -d steamcache/gene
 Riot | `sudo docker run --name riot-cache -p 10.0.0.6:80:80 -d steamcache/generic`
 Frontier | `sudo docker run --name frontier-cache -p 10.0.0.7:80:80 -d steamcache/generic`
 Windows | `sudo docker run --name windows-cache -p 10.0.0.8:80:80 -d steamcache/generic`
-Twitch | `sudo docker run --name twitch-cache -p 10.0.0.4:80:80 -d steamcache/twitch`
+Twitch | `sudo docker run --name twitch-cache -p 10.0.0.9:80:80 -d steamcache/twitch`
