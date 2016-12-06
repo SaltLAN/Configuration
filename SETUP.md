@@ -19,7 +19,7 @@ The goals of this project were more than one, and can be broken down into a few 
 
   * To reduce network load and prevent the possibility of saturating the venue's bandwidth.
 
-  * This means caching Steam, Origin, Uplay, Blizzard, Windows updates, Hirez, RSI, Frontier, Twitch, and Youtube.
+  * This means caching Steam, Origin, Uplay, Blizzard, Windows updates, Hirez, RSI, Frontier, Twitch.
 
 3.  Be a server
 
