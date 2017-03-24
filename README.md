@@ -15,7 +15,7 @@ I wanted to build SaltLAN after attending a LAN party in May, 2016. While the LA
  
 ## Configuration
 
-###Server
+### Server
 
 //side note:
 For anyone who's wondering why I'm releasing **so** much information on the setup and the possibility that this information might lead to a breach of network security:
@@ -33,14 +33,14 @@ Component | Hardware
   | 1x 1Gbps NIC for WAN
   | 2x 1Gbps NICs bonded for 2Gbps into LAN
   
-###Network
+### Network
 
 Component | Hardware
 --- | ---
 **Core switch** | 1x Cisco SLM 2048 48 port Gigabit switch
 **Disribution switches** | 6+x Netgear Prosafe 24 port 10/100 switch with 2x 1Gbps uplink
 
-###Software
+### Software
 
 Component | Software
 --- | ---
@@ -53,7 +53,7 @@ Usage monitoring | Grafana
 Usage storage | InfluxDB
 Usage collection | Telegraf
 
-##Address definition
+## Address definition
 
 IP Address | Hostname | Port | Interface | Service | Comments
 :--- | --- | --- | --- | :--- |--- | 
@@ -78,6 +78,6 @@ IP Address | Hostname | Port | Interface | Service | Comments
 `10.0.0.251 - 253` | Reserved | N/A | N/A | N/A | N/A 
 `10.0.0.254` | `core.network.saltlan.org` | `80/443` | N/A | Cisco | SLM2048 core switch
 `10.0.0.255` | Broadcast | N/A | N/A | N/A | N/A 
-##Netmap
+## Netmap
 
 ![Network Map](https://i.imgur.com/8V0OGwn.png)
