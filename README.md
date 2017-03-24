@@ -1,4 +1,4 @@
-#SaltLAN
+# SaltLAN
 
 Single-server LAN party
 
