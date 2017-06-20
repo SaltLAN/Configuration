@@ -64,7 +64,9 @@ IP Address | Hostname | Port | Interface | Service | Comments
 `10.0.0.3` | `blizzard.cache.saltlan.org` | `80` |  `eno2:3` |  Docker | Battle.net cache
 `10.0.0.4` | `origin.cache.saltlan.org` | `80` | `eno2:4` |  Docker | Origin cache
 `10.0.0.5` | `uplay.cache.saltlan.org` | `80` |  `eno2:5` | Docker | Uplay cache
-`10.0.0.6 - 9` | Reserved | N/A | N/A | N/A
+`10.0.0.6` | `ps4.cache.saltlan.org` | `80` | `eno2:6` | Docker | Sony (PS4)
+`10.0.0.7` | `microsoft.cache.saltlan.org` | `80` | `eno2:7` | Docker | Microsoft 
+`10.0.0.8 - 9` | Reserved | N/A | N/A | N/A
 `10.0.0.10` | `csgo.server.saltlan.org` | `27015` | `eno2:10` |  LGSM | CS:GO server
 `10.0.0.11` | `tf2.server.saltlan.org` | `27015` | `eno2:11` |  LGSM | TF2 server
 `10.0.0.12` | `q3.server.saltlan.org` | `27015` | `eno2:12` |  LGSM | Quake 3 server
